@@ -27,6 +27,8 @@
 *.lib
 
 # Executables
-*.exe
+# Leaving in exe for prof
+# *.exe
+# Leaving in exe for prof
 *.out
 *.app
