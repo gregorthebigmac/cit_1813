@@ -3,9 +3,7 @@
         {
             "name": "Win32",
             "includePath": [
-				"${workspaceFolder}/**",
-				"D:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\VC\\include\\**",
-				"C:\\Program Files (x86)\\Windows Kits\\**"
+				"${workspaceFolder}/**"
             ],
             "defines": [
                 "_DEBUG",
