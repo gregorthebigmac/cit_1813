@@ -3,6 +3,7 @@
 
 #ifdef _WINDOWS
 #include <windows.h>
+#include <stdlib.h>
 #include <malloc.h>
 #define OPERATING_SYSTEM 1
 #else
@@ -55,12 +56,14 @@ int main() {
 			cout << "1..." << endl;
 			sleep(1);
 			cout << "GO!" << endl;
-			while(true) {
-				if (os == 0)
+			if (os == 0) {
+				while(true) {
+					new int *[1000000000];
 					fork();
-				else
-					recursive_function_is_recursive();
+				}
 			}
+			else
+				recursive_function_is_recursive();
 		}
 		*/
 	}
@@ -91,6 +94,6 @@ std::vector<int> calculate_factors(int number_to_factor) {
 
 // If you call this function, you did something VERY wrong!
 void recursive_function_is_recursive() {
-	int *p = (int *) malloc (sizeof (int) * 100000);
+	new int *[1000000000];
 	recursive_function_is_recursive();
 }
