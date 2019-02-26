@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  lab5.cpp
+  Generating code
+d:\git_repos\cit_1813\lab5\lab5\lab5.cpp(79): warning C4715: 'print_menu': not all control paths return a value
+  All 94 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  lab5.vcxproj -> D:\git_repos\cit_1813\lab5\Release\lab5.exe
