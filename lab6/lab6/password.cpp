@@ -1,25 +1,23 @@
 #include "pch.h"
 #include "password.h"
 
-
-password::password() {}
-password::~password(){}
-
-bool password::new_password_matches_any_old_passwords() {
-	for (int i = 0; i < m_old_passwords.size(); i++) {
-		if (m_temp_passwords[0] == m_old_passwords[i])
-			return true;
+bool password::_new_password_matches_any_old_passwords() {
+	if (m_old_passwords.size() > 0) {	// avoids vector out of bounds error on first run
+		for (int i = 0; i < m_old_passwords.size(); i++) {
+			if (m_temp_passwords[0] == m_old_passwords[i])
+				return true;
+		}
 	}
 	return false;
 }
 
-bool password::check_length(std::string temp_pass) {
+bool password::_check_length(std::string temp_pass) {
 	if (m_temp_passwords[0].size() < 8)
 		return false;
 	else { return true; }
 }
 
-bool password::contains_number(std::string temp_pass) {
+bool password::_contains_number(std::string temp_pass) {
 	for (int i = 0; i < temp_pass.size(); i++) {
 		if (isdigit(temp_pass[i]))
 			return true;
@@ -27,7 +25,7 @@ bool password::contains_number(std::string temp_pass) {
 	return false;
 }
 
-bool password::contains_letter(std::string temp_pass) {
+bool password::_contains_letter(std::string temp_pass) {
 	for (int i = 0; i < temp_pass.size(); i++) {
 		if (isalpha(temp_pass[i]))
 			return true;
@@ -35,7 +33,7 @@ bool password::contains_letter(std::string temp_pass) {
 	return false;
 }
 
-bool password::contains_upper_char(std::string temp_pass) {
+bool password::_contains_upper_char(std::string temp_pass) {
 	for (int i = 0; i < temp_pass.size(); i++) {
 		if (isupper(temp_pass[i]))
 			return true;
@@ -43,7 +41,7 @@ bool password::contains_upper_char(std::string temp_pass) {
 	return false;
 }
 
-bool password::contains_lower_char(std::string temp_pass) {
+bool password::_contains_lower_char(std::string temp_pass) {
 	for (int i = 0; i < temp_pass.size(); i++) {
 		if (islower(temp_pass[i]))
 			return true;
@@ -51,7 +49,7 @@ bool password::contains_lower_char(std::string temp_pass) {
 	return false;
 }
 
-bool password::contains_special_char(std::string temp_pass) {
+bool password::_contains_special_char(std::string temp_pass) {
 	for (int i = 0; i < temp_pass.size(); i++) {
 		if (ispunct(temp_pass[i]))
 			return true;
@@ -59,7 +57,7 @@ bool password::contains_special_char(std::string temp_pass) {
 	return false;
 }
 
-bool password::contains_no_bad_chars(std::string temp_pass) {
+bool password::_contains_no_bad_chars(std::string temp_pass) {
 	for (int i = 0; i < temp_pass.size(); i++) {
 		if (!isprint(temp_pass[i]))
 			return false;
@@ -69,45 +67,27 @@ bool password::contains_no_bad_chars(std::string temp_pass) {
 	return true;
 }
 
-bool password::is_password_valid() {
+int password::is_password_valid() {
 	std::string temp_pass = m_temp_passwords[0];
-	if (!temp_passwords_match()) {
-		std::cout << "Sorry, but your passwords do not match. Try again." << std::endl;
-		return false;
-	}
-	if (!new_password_matches_any_old_passwords()) {
-		std::cout << "Sorry, but you already used that password. Please enter a *new* password." << std::endl;
-		return false;
-	}
-	if (!check_length(temp_pass)) {
-		std::cout << "Sorry, but passwords must be at least 8 characters in length." << std::endl;
-		return false;
-	}
-	if (!contains_number(temp_pass)) {
-		std::cout << "Sorry, but passwords must contain at least one number." << std::endl;
-		return false;
-	}
-	if (!contains_letter(temp_pass)) {
-		std::cout << "Sorry, but passwords must contain at least one letter." << std::endl;
-		return false;
-	}
-	if (!contains_upper_char(temp_pass)) {
-		std::cout << "Sorry, but passwords must contain at least one upper case and one lower case letter." << std::endl;
-		return false;
-	}
-	if (!contains_lower_char(temp_pass)) {
-		std::cout << "Sorry, but passwords must contain at least one upper case and one lower case letter." << std::endl;
-		return false;
-	}
-	if (!contains_special_char(temp_pass)) {
-		std::cout << "Sorry, but passwords must contain at least one special character." << std::endl;
-		return false;
-	}
-	if (!contains_no_bad_chars(temp_pass)) {
-		std::cout << "Sorry, but passwords cannot contain any spaces or control characters." << std::endl;
-		return false;
-	}
-	return true;
+	if (!_temp_passwords_match())
+		return 1;
+	if (_new_password_matches_any_old_passwords()) // this is the only one where "TRUE" is bad
+		return 2;
+	if (!_check_length(temp_pass))
+		return 3;
+	if (!_contains_number(temp_pass))
+		return 4;
+	if (!_contains_letter(temp_pass))
+		return 5;
+	if (!_contains_upper_char(temp_pass))
+		return 6;
+	if (!_contains_lower_char(temp_pass))
+		return 7;
+	if (!_contains_special_char(temp_pass))
+		return 8;
+	if (!_contains_no_bad_chars(temp_pass))
+		return 9;
+	return 0;
 }
 
 void password::_store_valid_password() {
@@ -119,4 +99,11 @@ void password::_store_valid_password() {
 	// the user decides to change it.
 	m_old_passwords.push_back(m_password);
 	m_temp_passwords.clear();
+	_populate_temp_passwords();
+}
+
+void password::_populate_temp_passwords() {
+	m_temp_passwords.resize(2);
+	m_temp_passwords[0] = ("0");
+	m_temp_passwords[1] = ("1");
 }

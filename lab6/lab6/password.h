@@ -14,20 +14,10 @@
 
 class password {
 public:
-	password();
-	~password();
+	password() { _populate_temp_passwords(); }	// Without this, you'll get a vector out of bounds error
+	~password() {}
 
-	// check for valid password
-	bool temp_passwords_match() { return (m_temp_passwords[0] == m_temp_passwords[1]); }
-	bool new_password_matches_any_old_passwords();
-	bool check_length(std::string temp_pass);
-	bool contains_number(std::string temp_pass);
-	bool contains_letter(std::string temp_pass);
-	bool contains_upper_char(std::string temp_pass);
-	bool contains_lower_char(std::string temp_pass);
-	bool contains_special_char(std::string temp_pass);
-	bool contains_no_bad_chars(std::string temp_pass);
-	bool is_password_valid();
+	int is_password_valid();
 	bool verify_password_entry(std::string password) { return (password == m_password); }
 
 	// setters
@@ -35,7 +25,20 @@ public:
 	void set_second_temp_password(std::string pass2) { m_temp_passwords[1] = pass2; }
 
 private:
+	void _populate_temp_passwords();
 	void _store_valid_password();
+
+	// check for valid password
+	bool _temp_passwords_match() { return (m_temp_passwords[0] == m_temp_passwords[1]); }
+	bool _new_password_matches_any_old_passwords();
+	bool _check_length(std::string temp_pass);
+	bool _contains_number(std::string temp_pass);
+	bool _contains_letter(std::string temp_pass);
+	bool _contains_lower_char(std::string temp_pass);
+	bool _contains_upper_char(std::string temp_pass);
+	bool _contains_special_char(std::string temp_pass);
+	bool _contains_no_bad_chars(std::string temp_pass);
+
 	std::string m_password;	// password is stored here once it passes validity checks and confirms they match.
 	std::vector<std::string> m_temp_passwords; // used for storing the password before validity checks and to make sure they match.
 	std::vector<std::string> m_old_passwords;	// old valid passwords stored here
