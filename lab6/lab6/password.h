@@ -19,6 +19,7 @@ public:
 
 	int is_password_valid();
 	bool verify_password_entry(std::string password) { return (password == m_password); }
+	void store_valid_password();
 
 	// setters
 	void set_first_temp_password(std::string pass1) { m_temp_passwords[0] = pass1; }
@@ -26,7 +27,6 @@ public:
 
 private:
 	void _populate_temp_passwords();
-	void _store_valid_password();
 
 	// check for valid password
 	bool _temp_passwords_match() { return (m_temp_passwords[0] == m_temp_passwords[1]); }

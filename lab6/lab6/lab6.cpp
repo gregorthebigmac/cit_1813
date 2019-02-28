@@ -42,7 +42,6 @@ void user_decision();
 
 int main() {
 	password_creation();
-	user_decision();
 	return 0;
 }
 
@@ -58,11 +57,11 @@ void password_creation() {
 	cout << "4. Passwords must contain at least one uppercase letter." << endl;
 	cout << "5. Passwords must contain at least one lowercase letter." << endl;
 	cout << "6. Passwords may NOT contain the following:" << endl
-			<< "     a whitespace character (i.e. the SPACEBAR key)" << endl
-			<< "     a newline character (i.e. pressing the RETURN key)" << endl
-			<< "     a tab character (i.e. pressing the TAB key)" << endl;
+		 << "     a whitespace character (i.e. the SPACEBAR key)" << endl
+		 << "     a newline character (i.e. pressing the RETURN key)" << endl
+		 << "     a tab character (i.e. pressing the TAB key)" << endl;
 	cout << "7. You may NOT reuse any old passwords. Every time you create a" << endl
-			<< "     new password, it must be unique." << endl << endl;
+		 << "     new password, it must be unique." << endl << endl;
 	cout << "Please enter a new password:" << endl;
 	string temp_password;
 	std::getline(std::cin, temp_password);
@@ -75,8 +74,9 @@ void password_creation() {
 	int pw_status = -1;
 	pw_status = pw.is_password_valid();
 	if (pw_status == 0) {
+		pw.store_valid_password();
 		cout << "Your password has been set." << endl << endl;
-		return;
+		user_decision();
 	}
 	else if (pw_status == 1) {
 		cout << "Sorry, but your passwords do not match. Try again." << endl << endl;
@@ -124,8 +124,20 @@ void user_decision() {
 	string change_or_quit;
 	cout << "Would you like to change your password [c] or quit [q]?" << endl;
 	std::getline(std::cin, change_or_quit);
-	if (change_or_quit[0] == 'c' || change_or_quit[0] == 'C')
-		password_creation();
+	if (change_or_quit[0] == 'c' || change_or_quit[0] == 'C') {
+		cout << "Before you can change your password, you must enter your password to verify" << endl
+			 << "your account. Please enter your current password:" << endl;
+		string password_attempt;
+		std::getline(std::cin, password_attempt);
+		if (pw.verify_password_entry(password_attempt)) {
+			cout << "Password confirmed." << endl << endl;
+			password_creation();
+		}
+		else {
+			cout << "Sorry, your password could not be verified." << endl;
+			user_decision();
+		}
+	}
 	else if (change_or_quit[0] == 'q' || change_or_quit[0] == 'Q')
 		cout << "Goodbye!" << endl;
 	else {

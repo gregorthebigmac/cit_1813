@@ -2,11 +2,9 @@
 #include "password.h"
 
 bool password::_new_password_matches_any_old_passwords() {
-	if (m_old_passwords.size() > 0) {	// avoids vector out of bounds error on first run
-		for (int i = 0; i < m_old_passwords.size(); i++) {
-			if (m_temp_passwords[0] == m_old_passwords[i])
-				return true;
-		}
+	for (int i = 0; i < m_old_passwords.size(); i++) {
+		if (m_temp_passwords[0] == m_old_passwords[i])
+			return true;
 	}
 	return false;
 }
@@ -90,7 +88,7 @@ int password::is_password_valid() {
 	return 0;
 }
 
-void password::_store_valid_password() {
+void password::store_valid_password() {
 	m_password = m_temp_passwords[0];
 	// this is acceptable because at this point, we have already stored the validated password, and
 	// therefore it will never be valid again if the user decides to change it. Waiting until the
