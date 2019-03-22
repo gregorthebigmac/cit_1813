@@ -32,3 +32,8 @@
 # Leaving in exe for prof
 *.out
 *.app
+
+# IDE/Editor settings
+# Leaving out vscode settings
+.vscode
+.vscode/*
