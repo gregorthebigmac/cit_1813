@@ -6,6 +6,7 @@ public:
 	hangman();
 	~hangman();
 
+	void reset_new_game();
 	void set_word_length();
 	void set_number_of_guesses();
 	void play();
@@ -23,6 +24,7 @@ private:
 	int m_num_of_allowed_guesses;
 	std::vector<char> _letters_guessed;
 	int _score;
+	bool _game_won;
 	// DEBUG
 	bool _debug_mode;
 };

@@ -1,0 +1,14 @@
+﻿  pch.cpp
+  lab6.cpp
+  password.cpp
+c:\docs_non_synced\git_repos\cit_1813\lab6\lab6\password.cpp(5): warning C4018: '<': signed/unsigned mismatch
+c:\docs_non_synced\git_repos\cit_1813\lab6\lab6\password.cpp(19): warning C4018: '<': signed/unsigned mismatch
+c:\docs_non_synced\git_repos\cit_1813\lab6\lab6\password.cpp(27): warning C4018: '<': signed/unsigned mismatch
+c:\docs_non_synced\git_repos\cit_1813\lab6\lab6\password.cpp(35): warning C4018: '<': signed/unsigned mismatch
+c:\docs_non_synced\git_repos\cit_1813\lab6\lab6\password.cpp(43): warning C4018: '<': signed/unsigned mismatch
+c:\docs_non_synced\git_repos\cit_1813\lab6\lab6\password.cpp(51): warning C4018: '<': signed/unsigned mismatch
+c:\docs_non_synced\git_repos\cit_1813\lab6\lab6\password.cpp(59): warning C4018: '<': signed/unsigned mismatch
+  Generating code
+  All 205 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  lab6.vcxproj -> C:\docs_non_synced\git_repos\cit_1813\lab6\Release\lab6.exe

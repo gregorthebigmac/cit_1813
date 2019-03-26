@@ -3,14 +3,20 @@
 
 random_word word("words");
 
-hangman::hangman() {
+void hangman::reset_new_game() {
 	m_word_length = 0;
 	_last_guess = 0;
 	_score = 0;
+	_game_won = false;
 	_debug_mode = false;
+	m_password = "";
+	while (m_pass_check.size() > 0) {
+		m_pass_check.pop_back();
+	}
+	while (_letters_guessed.size() > 0) {
+		_letters_guessed.pop_back();
+	}
 }
-
-hangman::~hangman() {}
 
 void hangman::set_word_length() {
 	system("CLS");
@@ -152,5 +158,9 @@ void hangman::player_guess_letter() {
 				break;
 			}
 		}
+	}
+	if (guess_is_correct == false) {
+		_last_guess = 2;
+
 	}
 }
