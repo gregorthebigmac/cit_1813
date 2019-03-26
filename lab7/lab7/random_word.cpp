@@ -2,17 +2,20 @@
 #include "random_word.h"
 
 
-random_word::random_word(std::string file_name) {
+random_word::random_word(std::string file_name)
+{
 	_debug_mode = false;
 	generate_list_from_file(file_name);
 }
 
-random_word::random_word(std::string file_name, bool debug_mode) {
+random_word::random_word(std::string file_name, bool debug_mode)
+{
 	_debug_mode = true;
 	generate_list_from_file(file_name);
 }
 
-void random_word::generate_list_from_file(std::string file_name) {
+void random_word::generate_list_from_file(std::string file_name)
+{
 	std::vector<std::string> _temp_word_list;
 	std::string _file_name = file_name;
 	std::ifstream fin;
@@ -24,8 +27,7 @@ void random_word::generate_list_from_file(std::string file_name) {
 			std::string temp;
 			std::getline(fin, temp);
 			if (temp.size() > biggest_word) {
-				biggest_word = temp.size();
-			}
+				biggest_word = temp.size(); }
 			_temp_word_list.push_back(temp);
 		}
 		std::cout << "[OK]" << std::endl;
@@ -55,8 +57,8 @@ void random_word::generate_list_from_file(std::string file_name) {
 		}
 		populate_word_list(_temp_word_list);
 		_verify_contents();
-		if (_debug_mode) 
-			_debug_print_word_list();
+		if (_debug_mode) {
+			_debug_print_word_list(); }
 	}
 	else {
 		std::cout << "[FAIL]" << std::endl;
@@ -64,21 +66,24 @@ void random_word::generate_list_from_file(std::string file_name) {
 	}
 }
 
-void random_word::populate_word_list(std::vector<std::string> unsorted_word_list) {
+void random_word::populate_word_list(std::vector<std::string> unsorted_word_list)
+{
 	for (int i = 0; i < unsorted_word_list.size(); i++) {
 		std::string temp = unsorted_word_list[i];
 		m_word_list[temp.size()].push_back(temp);
 	}
 }
 
-std::string random_word::pick_random_word(int word_length) {
+std::string random_word::pick_random_word(int word_length)
+{
 	srand(time(NULL));
 	int random_index = rand() % m_word_list[word_length].size();
 	random_index++;	// otherwise we get 0 as a possible index, and that would just return a number.
 	return m_word_list[word_length].at(random_index);
 }
 
-void random_word::_debug_print_word_list() {
+void random_word::_debug_print_word_list()
+{
 	bool _should_i_pause = false;
 	int _pause_this_often = 1000000;	// how many entries printed before pausing (default 1000000)
 	std::cout << "########## DEBUG MODE ##########" << std::endl;
@@ -93,29 +98,29 @@ void random_word::_debug_print_word_list() {
 	for (int x = 0; x < m_word_list.size(); x++) {
 		std::cout << "Printing contents of m_word_list[" << x << "]..." << std::endl;
 		for (int y = 0; y < m_word_list[x].size(); y++) {
-			if (y % _pause_this_often == 0)
-				system("PAUSE");
+			if (y % _pause_this_often == 0) {
+				system("PAUSE"); }
 			std::cout << "m_word_list[" << x << "] [" << y << "] = " << m_word_list[x][y] << std::endl;
 		}
 	}
 }
 
-void random_word::_verify_contents() {
+void random_word::_verify_contents()
+{
 	int word_count = 0;
 	if (_debug_mode)
 		std::cout << "Verifying contents of word list..." << std::endl;
 	// I'm not sure why, but somehow the m_word_list[0] vector gets overpopulated with 2 empty (i.e. "") strings. It only happens to
 	// m_word_list[0] and none of the others, so I threw in this while loop to trim it back down to what it's supposed to be.
 	while (m_word_list[0].size() > 1) {
-		m_word_list[0].pop_back();
-	}
+		m_word_list[0].pop_back(); }
 	for (int x = 0; x < m_word_list.size(); x++) {
 		int inside_word_count = m_word_list[x].size() - 1;
-		if (_debug_mode)
-			std::cout << "Words of length [" << x << "] = " << inside_word_count << std::endl;
+		if (_debug_mode) {
+			std::cout << "Words of length [" << x << "] = " << inside_word_count << std::endl; }
 		word_count = word_count + m_word_list[x].size();
 	}
 	word_count = word_count - m_word_list.size();
-	if (_debug_mode)
-		std::cout << "Total count of words in list = " << word_count << std::endl;
+	if (_debug_mode) {
+		std::cout << "Total count of words in list = " << word_count << std::endl; }
 }

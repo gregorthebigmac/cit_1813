@@ -11,11 +11,9 @@ void hangman::reset_new_game() {
 	_debug_mode = false;
 	m_password = "";
 	while (m_pass_check.size() > 0) {
-		m_pass_check.pop_back();
-	}
+		m_pass_check.pop_back(); }
 	while (_letters_guessed.size() > 0) {
-		_letters_guessed.pop_back();
-	}
+		_letters_guessed.pop_back(); }
 }
 
 void hangman::set_word_length() {
@@ -40,8 +38,8 @@ void hangman::set_number_of_guesses() {
 	int num_guesses = 0;
 	std::cin >> num_guesses;
 	std::cin.ignore();
-	if ((num_guesses > 0) && (num_guesses < 21))
-		m_num_of_allowed_guesses = num_guesses;
+	if ((num_guesses > 0) && (num_guesses < 21)) {
+		m_num_of_allowed_guesses = num_guesses; }
 	else {
 		std::cout << "Sorry, but " << num_guesses << " is NOT between 1 and 20. Try again." << std::endl;
 		system("PAUSE");
@@ -56,18 +54,17 @@ void hangman::play() {
 		set_word_length();
 		m_password = word.pick_random_word(m_word_length);
 		for (int i = 0; i < m_password.size(); i++) {
-			m_pass_check.push_back(false);
-		}
+			m_pass_check.push_back(false); }
 	}
-	if (_debug_mode)
-		std::cout << "Password is [" << m_password << "]" << std::endl;
+	if (_debug_mode) {
+		std::cout << "Password is [" << m_password << "]" << std::endl; }
 	print_game_screen();
 }
 
 void hangman::print_game_screen() {
 	/*
 	Finished product should look like:
-	
+
 	+---------------------------------------------------------------------------------+
 	| WRONG!                                                                          |
 	|                                                                                 |
@@ -78,55 +75,78 @@ void hangman::print_game_screen() {
 	| _  _  _  H  _  _  A  _  _  _  _  _  L  _  _  _  _  _  _  _  _  _                |
 	|                                                                                 |
 	+---------------------------------------------------------------------------------+
-	
+
 	  Guess a letter:
 
 	With each underscore representing a letter which has not been guessed yet.
 	*/
 	system("CLS");
 	std::cout << "+---------------------------------------------------------------------------------+" << std::endl;
-	if (_last_guess == 0)
-		std::cout << "|                                                                                 |" << std::endl;
-	else if (_last_guess == 1)
-		std::cout << "| CORRECT!                                                                        |" << std::endl;
-	else if (_last_guess == 2)
-		std::cout << "| WRONG!                                                                          |" << std::endl;
+	if (_last_guess == 0) {
+		std::cout << "|                                                                                 |" << std::endl; }
+	else if (_last_guess == 1) {
+		std::cout << "| CORRECT!                                                                        |" << std::endl; }
+	else if (_last_guess == 2) {
+		std::cout << "| WRONG!                                                                          |" << std::endl; }
 	std::cout << "|                                                                                 |" << std::endl;
 	std::cout << "| Number of Guesses Left: ";
 	int guesses_remaining = m_num_of_allowed_guesses - _letters_guessed.size();
-	if (guesses_remaining < 10)
-		std::cout << "0";
+	if (guesses_remaining < 10) {
+		std::cout << "0"; }
 	std::cout << guesses_remaining << "                                                      |" << std::endl;
 	std::cout << "| Letters Guessed: ";
 	for (int i = 0; i < _letters_guessed.size(); i++) {
-		std::cout << _letters_guessed[i] << " ";
-	}
+		std::cout << _letters_guessed[i] << " "; }
 	for (int i = (2* _letters_guessed.size()); i < 63; i++) {
-		std::cout << " ";
-	}
+		std::cout << " "; }
 	std::cout << "|" << std::endl;
 	std::cout << "|                                                                                 |" << std::endl;
 	std::cout << "|                                                                                 |" << std::endl;
 	std::cout << "| ";
 	for (int i = 0; i < m_password.size(); i++) {
-		if (m_pass_check[i] == true)
-			std::cout << m_password[i] << "  ";
-		else std::cout << "_  ";
+		if (m_pass_check[i] == true) {
+			std::cout << m_password[i] << "  "; }
+		else { std::cout << "_  "; }
 	}
 	for (int i = (3 * m_password.size()); i < 80; i++) {
-		std::cout << " ";
-	}
+		std::cout << " "; }
 	std::cout << "|" << std::endl;
 	std::cout << "|                                                                                 |" << std::endl;
 	std::cout << "+---------------------------------------------------------------------------------+" << std::endl;
 	player_guess_letter();
 }
-
-void hangman::player_guess_letter() {
+void hangman::player_solve_puzzle()
+{
+	std::cout << "Would you like to try to solve the puzzle? y/n" << std::endl;
+	std::string answer;
+	std::getline(std::cin, answer);
+	if (answer[0] == 'y' || answer[0] == 'Y') {
+		std::cout << "Enter your guess: ";
+		std::string guess;
+		std::getline(std::cin, guess);
+		if (guess.size() != m_password.size()) {
+			std::cout << "Your guess does not match the number of letters in the puzzle! Are you sure you want to submit this guess? y/n" << std::endl;
+			std::getline(std::cin, answer);
+			if (answer[0] == 'y' || answer[0] == 'Y') {
+				if (guess == m_password) {
+					std::cout << "I... don't know what just happened, but somehow... you... won? Congrats?" << std::endl;
+					_game_won = true;
+				}
+				else { std::cout << "Oooookaay. Well, it should be no surprise that " << guess << " is WRONG!" << std::endl; }
+			}
+			else {
+				std::cout << "Wise choice!";
+				print_game_screen();
+			}
+		}
+	}
+	else { print_game_screen(); }
+}
+void hangman::player_guess_letter()
+{
 	std::cout << "  Guess a letter: ";
 	std::string guess;
 	std::getline(std::cin, guess);
-	//std::cin.ignore();
 	if (guess[0] == ' ') {
 		std::cout << "Why did you put a space in your guess? There are no spaces in any of these words! Try again!" << std::endl;
 		system("PAUSE");
@@ -135,8 +155,8 @@ void hangman::player_guess_letter() {
 	std::cout << std::endl << "You chose " << guess[0] << ". Is this correct? y/n" << std::endl;
 	std::string confirm;
 	std::getline(std::cin, confirm);
-	if (confirm[0] != 'y' && confirm[0] != 'Y')	// used a NOT-AND-NOT here to keep the indentation flow nice and pretty!
-		print_game_screen();
+	if (confirm[0] != 'y' && confirm[0] != 'Y') {	// used a NOT-AND-NOT here to keep the indentation flow nice and pretty!
+		print_game_screen(); }
 	for (int i = 0; i < _letters_guessed.size(); i++) {
 		if (guess[0] == _letters_guessed[i]) {
 			std::cout << "You already guessed that letter! Try a different one!" << std::endl;
@@ -145,22 +165,26 @@ void hangman::player_guess_letter() {
 			break;
 		}
 	}
+	check_player_guess(guess[0]);
+}
+
+void hangman::check_player_guess(char guess) {
 	bool guess_is_correct = false;
 	for (int i = 0; i < m_password.size(); i++) {
-		if (guess[0] == m_password[i]) {
+		if (guess == m_password[i]) {
 			guess_is_correct = true;
-			_letters_guessed.push_back(guess[0]);
-			_last_guess = 1;
 			m_pass_check[i] = true;
-			int guesses_remaining = m_num_of_allowed_guesses - _letters_guessed.size();
-			if (guesses_remaining > 0) {
-				print_game_screen();
-				break;
-			}
 		}
 	}
-	if (guess_is_correct == false) {
-		_last_guess = 2;
+	if (guess_is_correct) {
+		_last_guess = 1; }
+	else { _last_guess = 2; }
+	_letters_guessed.push_back(guess);
+	int guesses_remaining = m_num_of_allowed_guesses - _letters_guessed.size();
+	if (guesses_remaining > 0) {
+		print_game_screen(); }
+}
 
-	}
+void hangman::done() {
+
 }

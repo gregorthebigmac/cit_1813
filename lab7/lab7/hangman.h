@@ -3,20 +3,23 @@
 
 class hangman {
 public:
-	hangman();
-	~hangman();
+	hangman() { reset_new_game(); }
+	~hangman() {}
 
 	void reset_new_game();
 	void set_word_length();
 	void set_number_of_guesses();
 	void play();
 	void print_game_screen();
+	void player_solve_puzzle();
 	void player_guess_letter();
+	void check_player_guess(char guess);
 
 	// DEBUG
 	void toggle_debug_mode() { _debug_mode = !_debug_mode; }
 
 private:
+	void done();
 	int m_word_length;
 	std::string m_password;
 	std::vector<bool> m_pass_check;

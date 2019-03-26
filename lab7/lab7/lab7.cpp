@@ -27,8 +27,8 @@ int main() {
 	cout << "That was fun! Play again? y/n" << endl;
 	string play_again;
 	getline(cin, play_again);
-	if (play_again[0] == 'y' || play_again[0] == 'Y')
-		game.play();
-	else cout << "Thanks for playing! Bye!" << endl;
+	if (play_again[0] == 'y' || play_again[0] == 'Y') {
+		game.play(); }
+	else { cout << "Thanks for playing! Bye!" << endl; }
 	return 0;
 }
