@@ -13,7 +13,7 @@ player gets 20 guesses instead of 22 because it caps at 20). Other than that, I
 think the implementation is pretty straightforward.
 */
 #include "pch.h"
-#include "random_word.h"
+#include "hangman.h"
 
 using std::cout;
 using std::cin;
@@ -21,7 +21,15 @@ using std::endl;
 using std::string;
 using std::vector;
 
+hangman game;
+
 int main() {
-	random_word word("words");
+	game.play();
+	cout << "That was fun! Play again? y/n" << endl;
+	string play_again;
+	getline(cin, play_again);
+	if (play_again[0] == 'y' || play_again[0] == 'Y')
+		game.play();
+	else cout << "Thanks for playing! Bye!" << endl;
 	return 0;
 }

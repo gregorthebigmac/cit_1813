@@ -1,0 +1,6 @@
+﻿  hangman.cpp
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(90): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(98): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(110): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(147): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  lab7.vcxproj -> D:\git_repos\cit_1813\lab7\x64\Debug\lab7.exe

@@ -151,10 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="hangman.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="random_word.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="hangman.cpp" />
     <ClCompile Include="lab7.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
