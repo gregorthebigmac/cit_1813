@@ -1,0 +1,16 @@
+﻿  hangman.cpp
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(96): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(106): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(120): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\hangman.cpp(238): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  lab7.cpp
+  random_word.cpp
+d:\git_repos\cit_1813\lab7\lab7\random_word.cpp(30): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\random_word.cpp(79): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\random_word.cpp(120): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\random_word.cpp(123): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+d:\git_repos\cit_1813\lab7\lab7\random_word.cpp(125): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  All 597 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  lab7.vcxproj -> D:\git_repos\cit_1813\lab7\x64\Release\lab7.exe
