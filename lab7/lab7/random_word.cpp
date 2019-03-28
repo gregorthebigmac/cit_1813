@@ -1,4 +1,4 @@
-#include "pch.h"
+#pragma once
 #include "random_word.h"
 
 
@@ -110,8 +110,10 @@ void random_word::_verify_contents()
 	int word_count = 0;
 	if (_debug_mode)
 		std::cout << "Verifying contents of word list..." << std::endl;
-	// I'm not sure why, but somehow the m_word_list[0] vector gets overpopulated with 2 empty (i.e. "") strings. It only happens to
-	// m_word_list[0] and none of the others, so I threw in this while loop to trim it back down to what it's supposed to be.
+	/*
+	I'm not sure why, but somehow the m_word_list[0] vector gets overpopulated with 2 empty (i.e. "") strings. It only happens to
+	m_word_list[0] and none of the others, so I threw in this while loop to trim it back down to what it's supposed to be.
+	*/
 	while (m_word_list[0].size() > 1) {
 		m_word_list[0].pop_back(); }
 	for (int x = 0; x < m_word_list.size(); x++) {

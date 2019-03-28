@@ -14,12 +14,12 @@ public:
 	void player_solve_puzzle();
 	void player_guess_letter();
 	void check_player_guess(char guess);
+	bool check_if_player_won();
 
 	// DEBUG
 	void toggle_debug_mode() { _debug_mode = !_debug_mode; }
 
 private:
-	void done();
 	int m_word_length;
 	std::string m_password;
 	std::vector<bool> m_pass_check;
