@@ -8,7 +8,10 @@ In this lab, you will develop the Battleship game by following the tasks below.
   c. num_hit – number of hits by the bomb
   d. is_equals – a function to compare location of the bomb to location of the ship
   e. cal_location – a function to calculate all 9 locations on the ship
-3. The ship can only locate inside the grid between (0,0) and (10,10). The ship size covers 2x2 grid (see figure below). The center location of the ship is the middle point of the 2x2 grid. This implies that the ship center only allows to be located between (1,1) and (9,9).
+3. The ship can only locate inside the grid between (0,0) and (10,10).
+  a. The ship size covers 2x2 grid (see figure below).
+  b. The center location of the ship is the middle point of the 2x2 grid.
+  c. This implies that the ship center only allows to be located between (1,1) and (9,9).
 4. When the game starts, the program will prompt the user to enter the center location of the ship.
 5. All 9 positions on the ship (grid positions) will be calculated and stored in the ship_location (Hint: It might be a good idea to use vector for this variable).
 6. User will be prompted to enter the bomb location.
