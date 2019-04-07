@@ -1,0 +1,7 @@
+﻿  pch.cpp
+  App.xaml.cpp
+  MainPage.xaml.cpp
+  XamlTypeInfo.Impl.g.cpp
+  XamlTypeInfo.g.cpp
+     Creating library D:\git_repos\cit_1813\lab8\Debug\lab8\lab8.lib and object D:\git_repos\cit_1813\lab8\Debug\lab8\lab8.exp
+  lab8.vcxproj -> D:\git_repos\cit_1813\lab8\Debug\lab8\lab8.exe
