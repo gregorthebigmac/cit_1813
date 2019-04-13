@@ -50,7 +50,7 @@ public:
 	int get_ship_length() { return ship_length; }
 	int get_ship_width() { return ship_width; }
 
-	void set_ship_center(int x, int y) { ship_center.set_coord(x, y); }
+	void set_ship_center(point coord) { ship_center.set_coord(coord.get_x_coord(), coord.get_y_coord()); }
 	void set_ship_length(int length) { ship_length = length; }
 	void set_ship_width(int width) { ship_width = width; }
 	void add_hit(int x, int y) {
@@ -94,41 +94,43 @@ private:
 	int ship_width;
 };
 
-void redraw(st_map map, ship player_ship);
-ship move_ship(st_map map, ship player_ship);
+void redraw();
+void move_ship();
+
+st_map map;
+ship player_ship;
 
 int main() {
-	st_map map;
-	ship player_ship;
 	map.set_origin_pos(0, 0);
 	map.set_termination_pos(10, 10);
-	player_ship.set_ship_center(1, 1);
-	player_ship.set_ship_length(2);
+    point origin;
+    origin.set_coord(1, 1);
+    player_ship.set_ship_center(origin);
+    player_ship.set_ship_length(2);
 	player_ship.set_ship_width(2);
 	player_ship.cal_location();
 
-	redraw(map, player_ship);
-	player_ship = move_ship(map, player_ship);
+	redraw();
+	move_ship();
 
 	return 0;
 }
 
-void redraw(st_map map, ship player_ship) {
+void redraw() {
 	point map_origin = map.get_origin_pos();
 	point map_bounds = map.get_termination_pos();
-	for (int x = map_origin.get_x_coord(); x < map_bounds.get_x_coord(); x++) {
-		for (int y = map_origin.get_y_coord(); y < map_bounds.get_y_coord(); y++) {
+    for (int y = map_origin.get_y_coord(); y < map_bounds.get_y_coord(); y++) {
+	    for (int x = map_origin.get_x_coord(); x < map_bounds.get_x_coord(); x++) {
 			point pos_a;
 			pos_a.set_coord(x, y);
 			vector<point> ship_location = player_ship.get_ship_location();
 			bool ship_is_here = false;
 			for (int i = 0; i < ship_location.size(); i++) {
 				if (player_ship.is_equals(pos_a, ship_location[i])) {
-					cout << "#";
 					ship_is_here = true; }
 			}
 			if (ship_is_here) {
-				//cout << "#";
+				cout << "#";
 			}
 			else cout << "-";
 		}
@@ -136,24 +138,24 @@ void redraw(st_map map, ship player_ship) {
 	}
 }
 
-ship move_ship(st_map map, ship player_ship) {
-	ship temp_ship = player_ship;
+void move_ship() {
 	cout << "Player 1: Use W A S D to move the ship to where you want it, and press P when you're done." << endl;
 	string player_input;
-	point center = temp_ship.get_ship_center();
+	point center = player_ship.get_ship_center();
 	int x = center.get_x_coord();
 	int y = center.get_y_coord();
 	while (player_input[0] != 'q') {
 		std::getline(cin, player_input);
 		char p_input = player_input[0];
 		cout << "You entered " << p_input << "." << endl;
-		/*if (p_input == 'w') {
+		if (p_input == 's') {
 			if (center.get_y_coord() < 9) {
-				x++;
-				temp_ship.set_ship_center(x, y);
-			}
+				y++;
+                center.set_coord(x, y);
+                player_ship.set_ship_center(center);
+            }
 		}
-		*/
-	}
-	return temp_ship;
+        player_ship.cal_location();
+        redraw();
+    }
 }
